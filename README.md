@@ -6,7 +6,6 @@
 - 二十四节气
 - 中国大陆法定休假/补班数据槽位
 - 全球通用节日
-- 抖音续火花提醒
 - AI 简报入口：OpenRouter、ChatGPT/OpenAI、Codex、OpenClaw
 - 大陆院线电影入口：猫眼、淘票票
 - 插件化扩展：以后新增模块只需要放入 `plugins/`
