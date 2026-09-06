@@ -3,7 +3,6 @@
   "years_ahead": 5,
   "calendar_name": "Ying的智能日历",
   "enabled_plugins": [
-    "core_holidays",
-    "daily_life"
+    "core_holidays"
   ]
 }
