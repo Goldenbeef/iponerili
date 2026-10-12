@@ -12,6 +12,7 @@ class CalendarEvent:
     location: str = ""
     categories: List[str] = field(default_factory=list)
     uid_seed: str = ""
+    rrule: str = ""
 
 def plugin_name() -> str:
     raise NotImplementedError

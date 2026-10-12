@@ -28,6 +28,28 @@ iPhone 路径：
 设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历
 ```
 
+## 值班安排与同步
+
+`daily_life` 插件读取 `config.json` 中的 `duty_schedule`：从
+2026-10-13 起每 3 天一次全天值班，长期有效。日历使用单个
+`RRULE:FREQ=DAILY;INTERVAL=3` 事件，不受 `years_ahead` 限制。
+固定 UID（`daily-life-duty` 的哈希）确保再次生成或订阅刷新时更新同一事件。
+调整安排时修改配置并重新生成，不要另外导入同一份 ICS。
+
+订阅地址：
+
+```text
+https://raw.githubusercontent.com/Yingzi920/iponerili/main/calendar.ics
+```
+
+更新配置或插件后，运行 `python generate_calendar.py` 并提交 `calendar.ics`，
+或在 Actions → Update Smart Calendar → Run workflow 中选择 `main`。
+现有 workflow 也会每天 UTC 22:20（北京时间次日 06:20）更新；代码提交
+本身不会触发该 workflow。已订阅此链接的苹果日历等待或手动刷新即可；
+首次使用按上面的 iPhone 路径订阅一次。仓库更新不能验证设备已刷新。
+
+验证值班规则：`python -m unittest discover -s tests -v`。
+
 ## 扩展方式
 
 新增一个插件：

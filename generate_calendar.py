@@ -44,6 +44,8 @@ def event_to_ics(ev):
     else:
         # Floating local time; Apple Calendar uses subscriber timezone.
         lines.append(f"DTSTART:{ev.start.replace('-', '').replace(':', '')}")
+    if ev.rrule:
+        lines.append(f"RRULE:{ev.rrule}")
     if ev.description:
         lines.append(f"DESCRIPTION:{esc(ev.description)}")
     if ev.location:

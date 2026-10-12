@@ -3,6 +3,11 @@
   "years_ahead": 5,
   "calendar_name": "Ying的智能日历",
   "enabled_plugins": [
-    "core_holidays"
-  ]
+    "core_holidays",
+    "daily_life"
+  ],
+  "duty_schedule": {
+    "start": "2026-10-13",
+    "interval_days": 3
+  }
 }
