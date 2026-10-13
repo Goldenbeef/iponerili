@@ -31,7 +31,7 @@ iPhone 路径：
 ## 值班安排与同步
 
 `daily_life` 插件读取 `config.json` 中的 `duty_schedule`：从
-2026-10-13 起每 3 天一次全天值班，长期有效。日历使用单个
+2026-10-15 起每 3 天一次全天值班，长期有效。日历使用单个
 `RRULE:FREQ=DAILY;INTERVAL=3` 事件，不受 `years_ahead` 限制。
 固定 UID（`daily-life-duty` 的哈希）确保再次生成或订阅刷新时更新同一事件。
 调整安排时修改配置并重新生成，不要另外导入同一份 ICS。
