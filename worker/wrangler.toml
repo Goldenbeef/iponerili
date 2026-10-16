@@ -1,0 +1,8 @@
+name = "iponerili-private-calendar"
+main = "src/index.js"
+compatibility_date = "2026-10-16"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "CALENDAR"
+id = "99098cb617ef43b7b1787a5a9272943e"
