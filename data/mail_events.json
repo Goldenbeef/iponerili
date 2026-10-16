@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "events": [
+    {
+      "identity": "lisa-premium-network-service-period-2026-10-15",
+      "title": "丽萨主机 本期服务结束",
+      "date": "2027-01-14",
+      "description": "本期服务区间截至今日；如需继续使用，请提前核对续费安排。",
+      "status": "confirmed",
+      "source_hashes": [
+        "7fe43f8cadd087b03215085058abf3bf9d29ff369d90b1ef7120ac7f7f3e4865",
+        "a552ff547e5dc44db1d81f2f4f333f30930b3ac2878826f4bf364604d6526751"
+      ]
+    }
+  ]
+}

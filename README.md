@@ -92,3 +92,14 @@ def generate(config):
 - 动态数据先缓存，再写入日历
 - 苹果日历只订阅一个稳定 Raw 链接
 - 以后可接 Notion、Telegram、OpenClaw、财务账单、案件期限
+
+## 邮箱与自述日程
+
+`mail_events` 读取 `data/mail_events.json` 的已核实全天单次事项，通过中央生成器发布。
+以业务事项和实际服务周期指定稳定 `identity`；改日期保留 identity，不以邮件ID建事件。
+同一事项跨邮件/来源合并 source_hashes，不存邮件正文、账号、主机IP、密码或支付信息。
+不同真实周期分别建记录；状态 confirmed 生成，pending_confirmation / cancelled 保留数据但不生成。
+当前接口仅支持有明确日期的全天事项；有具体时刻的安排须先扩展并验证时区支持，不能丢弃时刻。
+不要把账单创建日当付款状态，也不把服务期结束日推算为自动扣款日。每次更新运行完整生成器并核对原事件保留。
+
+

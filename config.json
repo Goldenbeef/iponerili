@@ -4,10 +4,12 @@
   "calendar_name": "Ying的智能日历",
   "enabled_plugins": [
     "core_holidays",
-    "daily_life"
+    "daily_life",
+    "mail_events"
   ],
   "duty_schedule": {
     "start": "2026-10-15",
     "interval_days": 3
   }
 }
+
