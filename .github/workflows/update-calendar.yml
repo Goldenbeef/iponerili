@@ -3,6 +3,10 @@ name: Update Smart Calendar
 permissions:
   contents: write
 
+concurrency:
+  group: update-smart-calendar
+  cancel-in-progress: false
+
 on:
   schedule:
     - cron: "20 22 * * *"
@@ -26,8 +30,13 @@ jobs:
           pip install -r requirements.txt || echo "no requirements"
 
       - name: Generate calendar
+        run: python generate_calendar.py
+
+      - name: Validate generated calendar
         run: |
-          python generate_calendar.py || echo "generate failed"
+          test -s calendar.ics
+          grep -q '^BEGIN:VCALENDAR' calendar.ics
+          grep -q '^END:VCALENDAR' calendar.ics
 
       - name: Commit changes safely
         run: |
@@ -42,3 +51,32 @@ jobs:
             git commit -m "auto update calendar"
             git push
           fi
+
+  publish-private:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+    steps:
+      - name: Skip until Cloudflare credentials are configured
+        if: env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == ''
+        run: echo "Private publication is not configured yet; the original Raw subscription remains available."
+
+      - name: Checkout code
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Publish private calendar to Cloudflare KV
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: >-
+          npx --yes wrangler@4 kv key put calendar.ics
+          --binding=CALENDAR
+          --path=calendar.ics
+          --config=worker/wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
