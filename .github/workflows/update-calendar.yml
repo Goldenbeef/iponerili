@@ -76,6 +76,7 @@ jobs:
           npx --yes wrangler@4 kv key put calendar.ics
           --binding=CALENDAR
           --path=calendar.ics
+          --remote
           --config=worker/wrangler.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
